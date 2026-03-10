@@ -40,6 +40,8 @@ const emptyForm = () => ({
   c_number: '',
 });
 
+type ProcurementForm = ReturnType<typeof emptyForm>;
+
 export function CreateProcurementDialog({
   open,
   onOpenChange,
@@ -47,9 +49,9 @@ export function CreateProcurementDialog({
 }: CreateProcurementDialogProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [formData, setFormData] = useState(emptyForm());
+  const [formData, setFormData] = useState<ProcurementForm>(emptyForm());
 
-  const setField = (key: string, value: string) => {
+  const setField = (key: keyof ProcurementForm, value: string) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
   };
 
@@ -96,7 +98,7 @@ export function CreateProcurementDialog({
     }
   };
 
-  const textField = (id: string, label: string, key: string) => (
+  const textField = (id: string, label: string, key: keyof ProcurementForm) => (
     <div className="space-y-2" key={id}>
       <Label htmlFor={id}>{label}</Label>
       <Input
@@ -107,7 +109,7 @@ export function CreateProcurementDialog({
     </div>
   );
 
-  const dateField = (id: string, label: string, key: string) => (
+  const dateField = (id: string, label: string, key: keyof ProcurementForm) => (
     <div className="space-y-2" key={id}>
       <Label htmlFor={id}>{label}</Label>
       <Input

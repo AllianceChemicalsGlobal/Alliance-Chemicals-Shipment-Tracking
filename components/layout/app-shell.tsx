@@ -263,13 +263,13 @@ export function AppShell({ children, userName, userEmail, userRole }: AppShellPr
           <CommandEmpty>No matching shipments.</CommandEmpty>
           <CommandGroup heading="Shipments">
             {shipments.map((shipment) => (
-              <CommandItem
-                key={shipment.id}
-                value={shipment.tracking_number}
-                onSelect={() => {
-                  window.location.href = `/dashboard?focus=${shipment.id}`;
-                }}
-              >
+                <CommandItem
+                  key={shipment.id}
+                  value={shipment.tracking_number ?? ''}
+                  onSelect={() => {
+                    window.location.href = `/dashboard?focus=${shipment.id}`;
+                  }}
+                >
                 <div className="flex flex-col gap-0.5">
                   <span className="font-medium">{shipment.tracking_number}</span>
                   <span className="text-xs text-muted-foreground">
